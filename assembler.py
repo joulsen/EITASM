@@ -36,29 +36,12 @@ def convert_to_bytecode(stream):
     for key, value in OPCODES.items():
         stream = stream.replace(key, str(value))
     stream = stream.replace('\n', ' ')
-    
     result = []
-    labels = {}
     for i, word in enumerate(stream.split(' ')):
-        if word.strip().endswith(':'):
-            labels[word[:-1]] = i
-        elif len(word) and not word.isspace():
+        if len(word) and not word.isspace():
             result.append(word)
-    
     stream = " ".join(result)
-    for key, value in labels.items():
-        stream = stream.replace(key, str(value))
-    try:
-        result = list(map(int, stream.split(' ')))
-    except ValueError:
-        for i, word in enumerate(stream.split(' ')):
-            if not word.isdigit():
-                sys.stderr.write("Error: Undefined word #{} {}\n".format(i, word))
-                sys.stderr.write("Assembly unsucessful!\n")
-                sys.exit()
-                return None
-            
-    return result
+    return list(map(int, stream.split(' ')))
 
 
 def int_to_VHDL(i):
@@ -71,14 +54,9 @@ def bytecode_to_VHDL(bytecode):
             ", ".join(output))
 
 
-
-stream = args.input[0].read()
-stream = convert_to_bytecode(stream)
-stream = bytecode_to_VHDL(stream)
-
-
-args.output.write(stream)
-if args.output == sys.stdout:
-    args.output.write('\n')
-else:
-    args.output.close()
+with args.input[0] as file:
+    args.output.write(bytecode_to_VHDL(convert_to_bytecode(file.read())))
+    if args.output == sys.stdout:
+        args.output.write('\n')
+    else:
+        args.output.close()

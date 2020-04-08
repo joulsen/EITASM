@@ -20,7 +20,3 @@ def get_opcodes(filepath):
 def dump_opcodes(opcodes, filepath):
     with open(filepath, 'w') as file:
         json.dump(opcodes, file)
-
-if __name__ == "__main__": 
-    print("hej")
-    dump_opcodes(get_opcodes("../CPU/CPU_v0.vhd"), "opcodes.json")
