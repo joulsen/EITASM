@@ -83,7 +83,7 @@ def int_to_VHDL(i, size = 2):
         i       --  Integer to be converted.
         size    --  Size of the integer in nibbles.
     """
-    return ('X"{:0' + str(size) + '}"').format(i)
+    return ('X"{:0' + str(size) + 'x}"').format(i)
 
 
 def bytecode_to_VHDL(bytecode):
