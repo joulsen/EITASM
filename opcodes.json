@@ -1,1 +1,1 @@
-{"NOP": 0, "PUSH": 1, "POP": 2, "LOAD": 3, "STORE": 4, "DUP": 5, "SWAP": 6, "IADD": 7, "ISUB": 8}
+{"NOP": 0, "PUSH": 1, "POP": 2, "LOAD": 3, "STORE": 4, "DUP": 5, "SWAP": 6, "ADD": 7, "SUB": 8, "AND": 9, "OR": 10, "NOT": 11, "GOTO": 16, "IFZRO": 17}
