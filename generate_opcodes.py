@@ -12,11 +12,14 @@ import json
 def get_opcodes(filepath):
     opcodes = {}
     with open(filepath, 'r') as file:
-        for bytecode, mneumonic in re.findall(r'X"(\d+)" => -- \[(\w+)\]',
+        for bytecode, mneumonic in re.findall(r'X"([\dABCDEF]+)" => -- \[(\w+)\]',
                                               file.read()):
-            opcodes[mneumonic] = int(bytecode)
+            opcodes[mneumonic] = int(bytecode, 16)
     return opcodes
 
 def dump_opcodes(opcodes, filepath):
     with open(filepath, 'w') as file:
         json.dump(opcodes, file)
+
+if __name__ == "__main__":
+    dump_opcodes(get_opcodes("CPU_v0.vhd"), "opcodes.json")
