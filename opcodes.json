@@ -1,84 +1,110 @@
 {
   "NOP": {
-    "bytecode": 0,
+    "bytecode": "0x00",
     "type": ""
   },
+  "GOTO": {
+    "bytecode": "0x23",
+    "type": "v"
+  },
   "NOT": {
-    "bytecode": 1,
+    "bytecode": "0x01",
     "type": "r"
   },
+  "ANDi": {
+    "bytecode": "0x03",
+    "type": "rv"
+  },
   "AND": {
-    "bytecode": 2,
+    "bytecode": "0x04",
+    "type": "rv"
+  },
+  "ORi": {
+    "bytecode": "0x06",
     "type": "rv"
   },
   "OR": {
-    "bytecode": 3,
+    "bytecode": "0x07",
+    "type": "rv"
+  },
+  "XORi": {
+    "bytecode": "0x09",
     "type": "rv"
   },
   "XOR": {
-    "bytecode": 4,
+    "bytecode": "0x0A",
     "type": "rv"
   },
-  "SHFT": {
-    "bytecode": 5,
+  "BSL": {
+    "bytecode": "0x0C",
+    "type": "r"
+  },
+  "BSR": {
+    "bytecode": "0x0D",
+    "type": "r"
+  },
+  "ADDi": {
+    "bytecode": "0x0E",
     "type": "rv"
   },
   "ADD": {
-    "bytecode": 6,
+    "bytecode": "0x0F",
+    "type": "rv"
+  },
+  "SUBi": {
+    "bytecode": "0x11",
     "type": "rv"
   },
   "SUB": {
-    "bytecode": 7,
-    "type": "rv",
-    "i_version": "SUBi"
+    "bytecode": "0x12",
+    "type": "rv"
   },
-  "SUBi": {
-    "bytecode": 8,
+  "MULUi": {
+    "bytecode": "0x14",
+    "type": "rv"
+  },
+  "MULU": {
+    "bytecode": "0x15",
+    "type": "rv"
+  },
+  "MULi": {
+    "bytecode": "0x17",
     "type": "rv"
   },
   "MUL": {
-    "bytecode": 9,
+    "bytecode": "0x18",
+    "type": "rv"
+  },
+  "LOADi": {
+    "bytecode": "0x1A",
     "type": "rv"
   },
   "LOAD": {
-    "bytecode": 10,
-    "type": "rv",
-    "i_version": "LOADi"
-  },
-  "LOADi": {
-    "bytecode": 11,
+    "bytecode": "0x1B",
     "type": "rv"
   },
   "STORE": {
-    "bytecode": 12,
-    "type": "rv"
-  },
-  "CLEAR": {
-    "bytecode": 13,
+    "bytecode": "0x1E",
     "type": "rv"
   },
   "MOV": {
-    "bytecode": 14,
+    "bytecode": "0x22",
     "type": "rv"
   },
-  "ZRO": {
-    "bytecode": 15,
+  "SZERO": {
+    "bytecode": "0x25",
+    "type": "r"
+  },
+  "SEQ": {
+    "bytecode": "0x26",
     "type": "rv"
   },
-  "NEG": {
-    "bytecode": 16,
+  "SLESS": {
+    "bytecode": "0x27",
     "type": "rv"
   },
-  "CMP": {
-    "bytecode": 17,
+  "SLEQ": {
+    "bytecode": "0x28",
     "type": "rv"
-  },
-  "JMPLEQ": {
-    "bytecode": 18,
-    "type": "rv"
-  },
-  "JMP": {
-    "bytecode": 19,
-    "type": "v"
   }
 }

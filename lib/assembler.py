@@ -6,7 +6,6 @@ Created on Fri Apr 17 10:38:54 2020
 """
 
 import re
-import json
 
 RE_HEX = r"(0x([\dABCDEF]+))"
 RE_BIN = r"(0b([\dABCDEF]+))"
@@ -62,7 +61,7 @@ replacement = {'rv': "{:01X}{:04X}",
                'r' : "{:01X}{}0000",
                'v' : "0{:04X}{}",
                ''  : "00000"}
-def insert_bytecodes(program):
+def insert_bytecodes(program, opcodes):
     new_program = ""
     for op, arg1, arg2 in re.findall(r"^(\w+) (\d+) ?\$?(\d+)?", program, flags=re.M):
         new_program += opcodes[op]["bytecode"] + replacement[opcodes[op]["type"]].format(lazy_int(arg1), lazy_int(arg2))
@@ -79,8 +78,12 @@ def bytecode_to_vhdl(program):
             content += 'x"{:07x}", '.format(int(line, 16))
     return prefix + content + suffix
 
+def assemble(program, opcodes):
+    return bytecode_to_vhdl(insert_bytecodes(replace_labels(expound_intermediate(unify_words(clean(program)))), opcodes))
+
 if __name__ == "__main__":
-    opcodes = json.load(open("opcodes_regex.json"))
+    import json
+    opcodes = json.load(open("opcodes.json"))
     file = open("examples/fibonacci.asm")
     program = file.read()
 
