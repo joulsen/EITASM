@@ -1,1 +1,84 @@
-{"NOP": 0, "PUSH": 1, "POP": 2, "LOAD": 3, "STORE": 4, "DUP": 5, "SWAP": 6, "ADD": 7, "SUB": 8, "AND": 9, "OR": 10, "NOT": 11, "GTR": 12, "GOTO": 16, "IFZRO": 17, "IFGTR": 18}
+{
+  "NOP": {
+    "bytecode": 0,
+    "type": ""
+  },
+  "NOT": {
+    "bytecode": 1,
+    "type": "r"
+  },
+  "AND": {
+    "bytecode": 2,
+    "type": "rv"
+  },
+  "OR": {
+    "bytecode": 3,
+    "type": "rv"
+  },
+  "XOR": {
+    "bytecode": 4,
+    "type": "rv"
+  },
+  "SHFT": {
+    "bytecode": 5,
+    "type": "rv"
+  },
+  "ADD": {
+    "bytecode": 6,
+    "type": "rv"
+  },
+  "SUB": {
+    "bytecode": 7,
+    "type": "rv",
+    "i_version": "SUBi"
+  },
+  "SUBi": {
+    "bytecode": 8,
+    "type": "rv"
+  },
+  "MUL": {
+    "bytecode": 9,
+    "type": "rv"
+  },
+  "LOAD": {
+    "bytecode": 10,
+    "type": "rv",
+    "i_version": "LOADi"
+  },
+  "LOADi": {
+    "bytecode": 11,
+    "type": "rv"
+  },
+  "STORE": {
+    "bytecode": 12,
+    "type": "rv"
+  },
+  "CLEAR": {
+    "bytecode": 13,
+    "type": "rv"
+  },
+  "MOV": {
+    "bytecode": 14,
+    "type": "rv"
+  },
+  "ZRO": {
+    "bytecode": 15,
+    "type": "rv"
+  },
+  "NEG": {
+    "bytecode": 16,
+    "type": "rv"
+  },
+  "CMP": {
+    "bytecode": 17,
+    "type": "rv"
+  },
+  "JMPLEQ": {
+    "bytecode": 18,
+    "type": "rv"
+  },
+  "JMP": {
+    "bytecode": 19,
+    "type": "v"
+  }
+}

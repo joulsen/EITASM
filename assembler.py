@@ -24,7 +24,7 @@ parser.add_argument('opcodes', metavar='--opcodes',
                     help="Specifies location of opcode JSON (default opcodes.json)",
                     type=argparse.FileType('r'), nargs='?', default="opcodes.json")
 
-args = parser.parse_args()
+args = parser.parse_args(["examples/quickmaths.asm"])
 
 
 OPCODES = json.load(args.opcodes)
