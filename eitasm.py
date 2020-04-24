@@ -7,7 +7,6 @@ Created on Fri Apr 24 20:18:37 2020
 """
 
 import argparse
-import sys
 import json
 import os
 from lib.assembler import assemble
