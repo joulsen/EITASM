@@ -1,0 +1,15 @@
+; Compiled from examples/fibonacci.asm
+; 
+memory_initialization_radix=16;
+memory_initialization_vector=
+1a00001,
+1a10001,
+2220000,
+0f00001,
+2810000,
+2300000,
+2220001,
+0f10000,
+2800001,
+2300000,
+2300002;

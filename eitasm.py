@@ -9,7 +9,7 @@ Created on Fri Apr 24 20:18:37 2020
 import argparse
 import json
 import os
-from lib.assembler import assemble
+from lib.assembler import assemble_to_ram
 
 def __is_valid_file_open(path):
     if os.path.isfile(path):
@@ -23,22 +23,22 @@ parser.add_argument('input', metavar='I',
                     help="Input file for assembly code",
                     type=__is_valid_file_open, nargs=1)
 
-parser.add_argument('output', metavar='O', type=str,
-                    help="Output file for VHDL code",
+parser.add_argument('-o', metavar='--output', dest="output", type=str,
+                    help="Output file for RAM initialization code",
                     nargs='?')
 
-parser.add_argument('opcodes', metavar='--opcodes',
+parser.add_argument('-op', metavar='--opcodes', dest="opcodes",
                     help="Specifies location of opcode JSON (default opcodes.json)",
                     type=argparse.FileType('r'), nargs='?', default="opcodes.json")
 
+parser.add_argument('-c', metavar='--comment', dest="comment",
+                    help="Comment that will be placed into header of RAM file.",
+                    type=str, nargs='?', default="")
+
 args = parser.parse_args()
-opcodes = json.load(args.opcodes)
+
 
 if __name__ == "__main__":
-    if args.output is None:
-        output_file = open(os.path.splitext(args.input[0].name)[0] + ".vhd", 'w')
-    else:
-        output_file = open(args.output, 'w')
-    output_file.write(assemble(args.input[0].read(), opcodes))
-    output_file.close()
-    print("Program compiled successfully to file '{}'".format(output_file.name))
+    if args.output != None:
+        args.output = open(args.output, 'w')
+    assemble_to_ram(args.input[0], args.opcodes, args.output, args.comment)

@@ -6,6 +6,8 @@ Created on Fri Apr 17 10:38:54 2020
 """
 
 import re
+import os
+import json
 
 RE_HEX = r"(0x([\dABCDEF]+))"
 RE_BIN = r"(0b([\dABCDEF]+))"
@@ -78,14 +80,34 @@ def bytecode_to_vhdl(program):
             content += 'x"{:07x}", '.format(int(line, 16))
     return prefix + content + suffix
 
+def bytecode_to_ram_init(program, filepath, comment):
+    comment = "; Compiled from {}\n; {}\n".format(filepath, comment)
+    prefix = "memory_initialization_radix=16;\nmemory_initialization_vector=\n"
+    content = ""
+    for i, line in enumerate(program.split('\n')):
+        if line != '':
+            content += "{:07x},\n".format(int(line, 16))
+    content = content[:-2] + ";"
+    return comment + prefix + content
+
 def assemble(program, opcodes):
-    return bytecode_to_vhdl(insert_bytecodes(replace_labels(expound_intermediate(unify_words(clean(program)))), opcodes))
+    return insert_bytecodes(replace_labels(expound_intermediate(unify_words(clean(program)))), opcodes)
+
+def assemble_to_ram(iFile, opcodes, oFile=None, comment=''):
+    opcodes = json.load(opcodes)
+    program = iFile.read()
+    program = expound_intermediate(unify_words(clean(program)))
+    program = insert_bytecodes(replace_labels(program), opcodes)
+    program = bytecode_to_ram_init(program, iFile.name, comment)
+    if oFile is None:
+        oFile = open(os.path.splitext(iFile.name)[0] + ".coe", 'w')
+    oFile.write(program)
+    oFile.close()
+    iFile.close()
+    return program
 
 if __name__ == "__main__":
     import json
-    opcodes = json.load(open("opcodes.json"))
-    file = open("examples/fibonacci.asm")
-    program = file.read()
-
-    test = replace_labels(expound_intermediate(unify_words(clean(program))))
-    test = insert_bytecodes(test)
+    opcodes = json.load(open("../opcodes.json"))
+    file = open("../examples/fibonacci.asm")
+    test = assemble_to_ram(file, open("../opcodes.json", 'r'), None)
