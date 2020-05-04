@@ -2,7 +2,7 @@
 
 ## An assembler for a VHDL CPU
 
-This assembler is made for the CPU/PLC at https://github.com/JanPeterChristiansen/PLC. The CPU and this assembler was made for my 4th semester project.
+This assembler is made for the CPU/PLC at https://github.com/JanPeterChristiansen/PLC. The CPU and this assembler was made for our 4th semester project.
 
 ## Requirements
 
