@@ -106,5 +106,89 @@
   "SLEQ": {
     "bytecode": "0x28",
     "type": "rv"
+  },
+  "READ": {
+    "bytecode": "0x2A",
+    "type": "rv"
+  },
+  "WRITE": {
+    "bytecode": "0x2B",
+    "type": "rv"
+  },
+  "RESET": {
+    "bytecode": "0x2C",
+    "type": "v"
+  },
+  "MSB": {
+    "bytecode": "0x2D",
+    "type": "rv"
+  },
+  "SREADY": {
+    "bytecode": "0x2E",
+    "type": "v"
+  },
+  "SFULL": {
+    "bytecode": "0x2F",
+    "type": "v"
+  },
+  "DREADi": {
+    "bytecode": "0x32",
+    "type": "rv"
+  },
+  "DREAD": {
+    "bytecode": "0x33",
+    "type": "r"
+  },
+  "DWRITE": {
+    "bytecode": "0x34",
+    "type": "r"
+  },
+  "MICROS": {
+    "bytecode": "0x35",
+    "type": "r"
+  },
+  "MILLIS": {
+    "bytecode": "0x36",
+    "type": "r"
+  },
+  "SEC": {
+    "bytecode": "0x37",
+    "type": "r"
+  },
+  "MIN": {
+    "bytecode": "0x38",
+    "type": "r"
+  },
+  "HOUR": {
+    "bytecode": "0x39",
+    "type": "r"
+  },
+  "PUSH": {
+    "bytecode": "0x3A",
+    "type": "r"
+  },
+  "POP": {
+    "bytecode": "0x3B",
+    "type": "r"
+  },
+  "RET": {
+    "bytecode": "0x3C",
+    "type": ""
+  },
+  "PPC": {
+    "bytecode": "0x3D",
+    "type": "r"
+  },
+  "SNESi": {
+    "bytecode": "0x3F",
+    "type": "rv"
+  },
+  "SNES": {
+    "bytecode": "0x40",
+    "type": "rv"
+  },
+  "LBUFFS": {
+    "bytecode": "0x41",
+    "type": "rv"
   }
 }
