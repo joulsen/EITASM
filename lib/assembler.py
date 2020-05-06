@@ -45,7 +45,9 @@ def replace_labels(program):
             new_program += line + '\n'
             pc += 1
     for label, value in sorted(labels.items(), key=lambda s: -len(s[0])):
-        new_program = new_program.replace(label, str(value))
+        new_program = re.sub("GOTO {}".format(label),
+                             "GOTO {}".format(str(value)), new_program)
+        #new_program = new_program.replace(label, str(value))
     return new_program.strip()
 
 
@@ -109,7 +111,7 @@ if __name__ == "__main__":
     # This section is for debugging.
     import json
     opcodes = json.load(open("../opcodes.json"))
-    file = open("../examples/tests/nop.asm")
+    file = open("../examples/tests/label.asm")
     steps = []
     steps.append(clean(file.read()))
     steps.append(unify_words(steps[0]))
