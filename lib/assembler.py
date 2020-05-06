@@ -40,14 +40,17 @@ def replace_labels(program):
     labels = {}
     for i, line in enumerate(program.split('\n')):
         if ':' in line:
-            labels[line[:line.find(':')]] = pc
+            label = line[:line.find(':')]
+            if re.search(r"^[A-Za-z0-9_]+$", label) is None:
+                raise ValueError('Illegal character(s) in label "{}"'.format(label))
+            else:
+                labels[label] = pc
         else:
             new_program += line + '\n'
             pc += 1
     for label, value in sorted(labels.items(), key=lambda s: -len(s[0])):
         new_program = re.sub("GOTO {}".format(label),
                              "GOTO {}".format(str(value)), new_program)
-        #new_program = new_program.replace(label, str(value))
     return new_program.strip()
 
 
