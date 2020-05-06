@@ -61,10 +61,10 @@ def lazy_int(s):
 replacement = {'rv': "{:01X}{:04X}",
                'r' : "{:01X}{}0000",
                'v' : "0{:04X}{}",
-               ''  : "00000"}
+               ''  : "00000{}{}"}
 def insert_bytecodes(program, opcodes):
     new_program = ""
-    for op, arg1, arg2 in re.findall(r"^(\w+) (\d+) ?\$?(\d+)?", program, flags=re.M):
+    for op, arg1, arg2 in re.findall(r"^(\w+) ?(\d+)? ?\$?(\d+)?", program, flags=re.M):
         new_program += opcodes[op]["bytecode"] + replacement[opcodes[op]["type"]].format(lazy_int(arg1), lazy_int(arg2))
         new_program += '\n'
 
