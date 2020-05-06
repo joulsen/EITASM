@@ -214,5 +214,21 @@
   "SRDY": {
     "bytecode": "0x47",
     "type": "r"
+  },
+  "OOCC": {
+    "bytecode": "0x48",
+    "type": "rv"
+  },
+  "OOCR": {
+    "bytecode": "0x49",
+    "type": "r"
+  },
+  "FFC": {
+    "bytecode": "0x4A",
+    "type": "rv"
+  },
+  "FFR": {
+    "bytecode": "0x4B",
+    "type": "rv"
   }
 }
