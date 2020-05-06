@@ -11,8 +11,8 @@ import json
 
 RE_HEX = r"(0x([\dABCDEF]+))"
 RE_BIN = r"(0b([\dABCDEF]+))"
-RE_EMPTY_LINES = r"^\s*\n"
-RE_COMMENT = r"((//|;|--).*)"
+RE_EMPTY_LINES = r"(^((\/\/|;).*|\s*)\n)"
+RE_COMMENT = r"(\s*(\/\/|;).*)"
 RE_INTERMEDIATE = r"(\w+)(.+\$)"
 
 def unify_words(program):
@@ -40,12 +40,11 @@ def replace_labels(program):
     labels = {}
     for i, line in enumerate(program.split('\n')):
         if ':' in line:
-            labels[line.strip()[:-1]] = pc
+            labels[line[:line.find(':')]] = pc
         else:
             new_program += line + '\n'
             pc += 1
-
-    for label, value in labels.items():
+    for label, value in sorted(labels.items(), key=lambda s: -len(s[0])):
         new_program = new_program.replace(label, str(value))
     return new_program.strip()
 
@@ -107,7 +106,12 @@ def assemble_to_ram(iFile, opcodes, oFile=None, comment=''):
     return program
 
 if __name__ == "__main__":
+    # This section is for debugging.
     import json
     opcodes = json.load(open("../opcodes.json"))
-    file = open("../examples/fibonacci.asm")
-    test = assemble_to_ram(file, open("../opcodes.json", 'r'), None)
+    file = open("../examples/tests/nop.asm")
+    steps = []
+    steps.append(clean(file.read()))
+    steps.append(unify_words(steps[0]))
+    steps.append(replace_labels(steps[1]))
+    steps.append(insert_bytecodes(steps[2], opcodes))
