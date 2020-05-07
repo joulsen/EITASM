@@ -215,7 +215,7 @@
     "bytecode": "0x47",
     "type": "r"
   },
-  "OOCC": {
+  "OOCW": {
     "bytecode": "0x48",
     "type": "rv"
   },
@@ -223,12 +223,24 @@
     "bytecode": "0x49",
     "type": "r"
   },
-  "FFC": {
+  "FIRC": {
     "bytecode": "0x4A",
     "type": "rv"
   },
-  "FFR": {
+  "FIRR": {
     "bytecode": "0x4B",
     "type": "rv"
-  }
+  },
+  "SEQi": {
+    "bytecode": "0x4C",
+    "type": "rv"
+  },
+  "SLESSi": {
+    "bytecode": "0x4D",
+    "type": "rv"
+  },
+  "SLEQi": {
+    "bytecode": "0x4E",
+    "type": "rv"
+  },
 }
