@@ -115,7 +115,7 @@
     "bytecode": "0x2B",
     "type": "rv"
   },
-  "RESET": {
+  "RSTS": {
     "bytecode": "0x2C",
     "type": "v"
   },
@@ -143,11 +143,11 @@
     "bytecode": "0x34",
     "type": "r"
   },
-  "MICROS": {
+  "USEC": {
     "bytecode": "0x35",
     "type": "r"
   },
-  "MILLIS": {
+  "MSEC": {
     "bytecode": "0x36",
     "type": "r"
   },
@@ -241,6 +241,18 @@
   },
   "SLEQi": {
     "bytecode": "0x4E",
+    "type": "rv"
+  },
+  "SNEQi": {
+    "bytecode": "0x4F",
+    "type": "rv"
+  },
+  "PPC": {
+    "bytecode": "0x3D",
+    "type": ""
+  },
+  "WRITEi": {
+    "bytecode": "0x50",
     "type": "rv"
   }
 }
