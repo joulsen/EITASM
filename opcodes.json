@@ -1,1 +1,246 @@
-NOP, GOTO, NOT, ANDi, AND, ORi, OR, XORi, XOR, BSL, BSR, ADDi, ADD, SUBi, SUB, MULUi, MULU, MULi, MUL, LOADi, LOAD, STORE, CLEAR, MOV, SZERO, SEQ, SLESS, SLEQ, READ, WRITE, RESET, MSB, SNRDY, SFULL, DREADi, DREAD, DWRITE, MICROS, MILLIS, SEC, MIN, HOUR, PUSH, POP, RET, PPC, SNESi, SNES, LBUFFS, SOMUX, SPWM, SNZ, SNEQ, SRET, SRDY, OOCW, OOCR, FIRC, FIRR, SEQi, SLESSi, SLEQi
+{
+  "NOP": {
+    "bytecode": "0x00",
+    "type": ""
+  },
+  "GOTO": {
+    "bytecode": "0x23",
+    "type": "v"
+  },
+  "NOT": {
+    "bytecode": "0x01",
+    "type": "r"
+  },
+  "ANDi": {
+    "bytecode": "0x03",
+    "type": "rv"
+  },
+  "AND": {
+    "bytecode": "0x04",
+    "type": "rv"
+  },
+  "ORi": {
+    "bytecode": "0x06",
+    "type": "rv"
+  },
+  "OR": {
+    "bytecode": "0x07",
+    "type": "rv"
+  },
+  "XORi": {
+    "bytecode": "0x09",
+    "type": "rv"
+  },
+  "XOR": {
+    "bytecode": "0x0A",
+    "type": "rv"
+  },
+  "BSL": {
+    "bytecode": "0x0C",
+    "type": "r"
+  },
+  "BSR": {
+    "bytecode": "0x0D",
+    "type": "r"
+  },
+  "ADDi": {
+    "bytecode": "0x0E",
+    "type": "rv"
+  },
+  "ADD": {
+    "bytecode": "0x0F",
+    "type": "rv"
+  },
+  "SUBi": {
+    "bytecode": "0x11",
+    "type": "rv"
+  },
+  "SUB": {
+    "bytecode": "0x12",
+    "type": "rv"
+  },
+  "MULUi": {
+    "bytecode": "0x14",
+    "type": "rv"
+  },
+  "MULU": {
+    "bytecode": "0x15",
+    "type": "rv"
+  },
+  "MULi": {
+    "bytecode": "0x17",
+    "type": "rv"
+  },
+  "MUL": {
+    "bytecode": "0x18",
+    "type": "rv"
+  },
+  "LOADi": {
+    "bytecode": "0x1A",
+    "type": "rv"
+  },
+  "LOAD": {
+    "bytecode": "0x1B",
+    "type": "rv"
+  },
+  "STORE": {
+    "bytecode": "0x1E",
+    "type": "rv"
+  },
+  "MOV": {
+    "bytecode": "0x22",
+    "type": "rv"
+  },
+  "SZERO": {
+    "bytecode": "0x25",
+    "type": "r"
+  },
+  "SEQ": {
+    "bytecode": "0x26",
+    "type": "rv"
+  },
+  "SLESS": {
+    "bytecode": "0x27",
+    "type": "rv"
+  },
+  "SLEQ": {
+    "bytecode": "0x28",
+    "type": "rv"
+  },
+  "READ": {
+    "bytecode": "0x2A",
+    "type": "rv"
+  },
+  "WRITE": {
+    "bytecode": "0x2B",
+    "type": "rv"
+  },
+  "RESET": {
+    "bytecode": "0x2C",
+    "type": "v"
+  },
+  "MSB": {
+    "bytecode": "0x2D",
+    "type": "rv"
+  },
+  "SNRDY": {
+    "bytecode": "0x2E",
+    "type": "v"
+  },
+  "SFULL": {
+    "bytecode": "0x2F",
+    "type": "v"
+  },
+  "DREADi": {
+    "bytecode": "0x32",
+    "type": "rv"
+  },
+  "DREAD": {
+    "bytecode": "0x33",
+    "type": "r"
+  },
+  "DWRITE": {
+    "bytecode": "0x34",
+    "type": "r"
+  },
+  "MICROS": {
+    "bytecode": "0x35",
+    "type": "r"
+  },
+  "MILLIS": {
+    "bytecode": "0x36",
+    "type": "r"
+  },
+  "SEC": {
+    "bytecode": "0x37",
+    "type": "r"
+  },
+  "MIN": {
+    "bytecode": "0x38",
+    "type": "r"
+  },
+  "HOUR": {
+    "bytecode": "0x39",
+    "type": "r"
+  },
+  "PUSH": {
+    "bytecode": "0x3A",
+    "type": "r"
+  },
+  "POP": {
+    "bytecode": "0x3B",
+    "type": "r"
+  },
+  "RET": {
+    "bytecode": "0x3C",
+    "type": ""
+  },
+  "PPC": {
+    "bytecode": "0x3D",
+    "type": "r"
+  },
+  "SNESi": {
+    "bytecode": "0x3F",
+    "type": "rv"
+  },
+  "SNES": {
+    "bytecode": "0x40",
+    "type": "rv"
+  },
+  "LBUFFS": {
+    "bytecode": "0x41",
+    "type": "rv"
+  },
+  "SOMUX": {
+    "bytecode": "0x42",
+    "type": "v"
+  },
+  "SPWM": {
+    "bytecode": "0x43",
+    "type": "v"
+  },
+  "SNZ": {
+    "bytecode": "0x44",
+    "type": "r"
+  },
+  "SNEQ": {
+    "bytecode": "0x45",
+    "type": "rv"
+  },
+  "SRET": {
+    "bytecode": "0x46",
+    "type": ""
+  },
+  "SRDY": {
+    "bytecode": "0x47",
+    "type": "r"
+  },
+  "OOCW": {
+    "bytecode": "0x48",
+    "type": "rv"
+  },
+  "OOCR": {
+    "bytecode": "0x49",
+    "type": "r"
+  },
+  "FIRC": {
+    "bytecode": "0x4A",
+    "type": "rv"
+  },
+  "FIRR": {
+    "bytecode": "0x4B",
+    "type": "rv"
+  },
+  "SEQi": {
+    "bytecode": "0x4C",
+    "type": "rv"
+  },
+  "SLESSi": {
+    "bytecode": "0x4D",
+    "type": "rv"
+  },
+  "SLEQi": {
+    "bytecode": "0x4E",
+    "type": "rv"
+  }
+}
