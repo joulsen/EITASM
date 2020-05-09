@@ -83,9 +83,25 @@
     "bytecode": "0x1B",
     "type": "rv"
   },
+  "LOADn": {
+    "bytecode": "0x1C",
+    "type": "rv"
+  },
   "STORE": {
     "bytecode": "0x1E",
     "type": "rv"
+  },
+  "STOREn": {
+    "bytecode": "0x1F",
+    "type": "rv"
+  },
+  "CLRREG": {
+    "bytecode": "0x20",
+    "type": "r"
+  },
+  "CLRMEM": {
+    "bytecode": "0x21",
+    "type": "v"
   },
   "MOV": {
     "bytecode": "0x22",
@@ -177,7 +193,7 @@
   },
   "PPC": {
     "bytecode": "0x3D",
-    "type": "r"
+    "type": ""
   },
   "SNESi": {
     "bytecode": "0x3F",
@@ -247,12 +263,12 @@
     "bytecode": "0x4F",
     "type": "rv"
   },
-  "PPC": {
-    "bytecode": "0x3D",
+  "RSTT": {
+    "bytecode": "0x50",
     "type": ""
   },
   "WRITEi": {
-    "bytecode": "0x50",
+    "bytecode": "0x51",
     "type": "rv"
   }
 }
