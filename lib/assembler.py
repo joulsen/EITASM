@@ -9,6 +9,8 @@ import re
 import os
 import json
 
+RE_INCLUDE = "#include [\"\'](.+)[\"\']"
+RE_INCLUDE_LIB = "#include (\w+)"
 RE_HEX = r"(0x([\dABCDEF]+))"
 RE_BIN = r"(0b([\dABCDEF]+))"
 RE_EMPTY_LINES = r"(^((\/\/|;).*|\s*)\n)"
@@ -16,6 +18,19 @@ RE_COMMENT = r"(\s*(\/\/|;).*)"
 RE_IMMEDIATE = r"(\w+)(.+\$)"
 
 DEBUG_FLAG = 1
+
+def add_includes(program, path=__file__):
+    N_INC = 0
+    for match in re.finditer(RE_INCLUDE_LIB, program, re.I):
+        input_file = open(os.path.join(os.path.dirname(__file__), "../", "include", match.group(1) + ".asm"))
+        program = program.replace(match.group(0), input_file.read())
+        N_INC += 1
+    for match in re.finditer(RE_INCLUDE, program, re.I):
+        input_file = open(os.path.join(os.path.dirname(path), match.group(1)), 'r')
+        program = program.replace(match.group(0), input_file.read())
+        N_INC += 1
+    if DEBUG_FLAG: print("{} files included.".format(N_INC))
+    return program
 
 def unify_words(program):
     try:
@@ -110,6 +125,7 @@ def assemble(program, opcodes):
 def assemble_to_ram(iFile, opcodes, oFile=None, comment=''):
     opcodes = json.load(opcodes)
     program = iFile.read()
+    program = add_includes(program, iFile.name)
     program = expound_immediate(unify_words(clean(program)))
     program = insert_bytecodes(replace_labels(program), opcodes)
     program = bytecode_to_ram_init(program, iFile.name, comment)
