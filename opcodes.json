@@ -147,6 +147,14 @@
     "bytecode": "0x2F",
     "type": "v"
   },
+  "CONCi": {
+    "bytecode": "0x30",
+    "type": "rv"
+  },
+  "CONC": {
+    "bytecode": "0x31",
+    "type": "rv"
+  },
   "DREADi": {
     "bytecode": "0x32",
     "type": "rv"
