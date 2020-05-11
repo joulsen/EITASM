@@ -13,7 +13,9 @@ RE_HEX = r"(0x([\dABCDEF]+))"
 RE_BIN = r"(0b([\dABCDEF]+))"
 RE_EMPTY_LINES = r"(^((\/\/|;).*|\s*)\n)"
 RE_COMMENT = r"(\s*(\/\/|;).*)"
-RE_INTERMEDIATE = r"(\w+)(.+\$)"
+RE_IMMEDIATE = r"(\w+)(.+\$)"
+
+DEBUG_FLAG = 1
 
 def unify_words(program):
     try:
@@ -27,11 +29,14 @@ def unify_words(program):
             program = re.sub(*pair, program)
     except ValueError:
         pass
+    if DEBUG_FLAG: print("Hexadecimal and binary numbers parsed.")
     return program
 
 def clean(program):
+    N_ORIG = len(program)
     program = re.sub(RE_EMPTY_LINES, "", program, flags=re.M)
     program = re.sub(RE_COMMENT, "", program)
+    if DEBUG_FLAG: print("{} characters of comments and whitespace removed.".format(N_ORIG - len(program)))
     return program.strip()
 
 def replace_labels(program):
@@ -51,11 +56,15 @@ def replace_labels(program):
     for label, value in sorted(labels.items(), key=lambda s: -len(s[0])):
         new_program = re.sub("GOTO {}".format(label),
                              "GOTO {}".format(str(value)), new_program)
+    if DEBUG_FLAG: print("{} labels replaced.".format(len(labels)))
     return new_program.strip()
 
 
-def expound_intermediate(program):
-    return re.sub(RE_INTERMEDIATE, r"\1i\2", program)
+def expound_immediate(program):
+    N_ORIG = len(program)
+    program = re.sub(RE_IMMEDIATE, r"\1i\2", program)
+    if DEBUG_FLAG: print("{} immediate commands added.".format(len(program) - N_ORIG))
+    return program
 
 def lazy_int(s):
     try:
@@ -72,7 +81,7 @@ def insert_bytecodes(program, opcodes):
     for op, arg1, arg2 in re.findall(r"^(\w+) ?(\d+)? ?\$?(\d+)?", program, flags=re.M):
         new_program += opcodes[op]["bytecode"] + replacement[opcodes[op]["type"]].format(lazy_int(arg1), lazy_int(arg2))
         new_program += '\n'
-
+    if DEBUG_FLAG: print("{} bytecodes inserted.".format(len(new_program.split('\n')) - 1))
     return new_program
 
 def bytecode_to_vhdl(program):
@@ -92,15 +101,16 @@ def bytecode_to_ram_init(program, filepath, comment):
         if line != '':
             content += "{:07x},\n".format(int(line, 16))
     content = content[:-2] + ";"
+    if DEBUG_FLAG: print("Bytecode assembled to RAM content.")
     return comment + prefix + content
 
 def assemble(program, opcodes):
-    return insert_bytecodes(replace_labels(expound_intermediate(unify_words(clean(program)))), opcodes)
+    return insert_bytecodes(replace_labels(expound_immediate(unify_words(clean(program)))), opcodes)
 
 def assemble_to_ram(iFile, opcodes, oFile=None, comment=''):
     opcodes = json.load(opcodes)
     program = iFile.read()
-    program = expound_intermediate(unify_words(clean(program)))
+    program = expound_immediate(unify_words(clean(program)))
     program = insert_bytecodes(replace_labels(program), opcodes)
     program = bytecode_to_ram_init(program, iFile.name, comment)
     if oFile is None:
@@ -108,15 +118,5 @@ def assemble_to_ram(iFile, opcodes, oFile=None, comment=''):
     oFile.write(program)
     oFile.close()
     iFile.close()
+    if DEBUG_FLAG: print("Program sucessfully compiled to {}".format(oFile.name))
     return program
-
-if __name__ == "__main__":
-    # This section is for debugging.
-    import json
-    opcodes = json.load(open("../opcodes.json"))
-    file = open("../examples/tests/label.asm")
-    steps = []
-    steps.append(clean(file.read()))
-    steps.append(unify_words(steps[0]))
-    steps.append(replace_labels(steps[1]))
-    steps.append(insert_bytecodes(steps[2], opcodes))

@@ -1,4 +1,4 @@
-#!/usr/bin/env python
+#!/usr/bin/env python3
 # -*- coding: utf-8 -*-
 """
 Created on Fri Apr 24 20:18:37 2020
@@ -7,7 +7,6 @@ Created on Fri Apr 24 20:18:37 2020
 """
 
 import argparse
-import json
 import os
 from lib.assembler import assemble_to_ram
 
@@ -29,7 +28,8 @@ parser.add_argument('-o', metavar='--output', dest="output", type=str,
 
 parser.add_argument('-op', metavar='--opcodes', dest="opcodes",
                     help="Specifies location of opcode JSON (default opcodes.json)",
-                    type=argparse.FileType('r'), nargs='?', default="opcodes.json")
+                    type=argparse.FileType('r'), nargs='?',
+                    default=os.path.join(os.path.dirname(__file__), "opcodes.json"))
 
 parser.add_argument('-c', metavar='--comment', dest="comment",
                     help="Comment that will be placed into header of RAM file.",
