@@ -9,10 +9,10 @@ import re
 import os
 import json
 
-RE_INCLUDE = "#include [\"\'](.+)[\"\']"
-RE_INCLUDE_LIB = "#include (\w+)"
+RE_INCLUDE = r"#include [\"\'](.+)[\"\']"
+RE_INCLUDE_LIB = r"#include (\w+)"
 RE_HEX = r"(0x([\dABCDEF]+))"
-RE_BIN = r"(0b([\dABCDEF]+))"
+RE_BIN = r"(0b([01]+))"
 RE_EMPTY_LINES = r"(^((\/\/|;).*|\s*)\n)"
 RE_COMMENT = r"(\s*(\/\/|;).*)"
 RE_IMMEDIATE = r"(\w+)(.+\$)"
@@ -125,8 +125,9 @@ def assemble(program, opcodes):
 def assemble_to_ram(iFile, opcodes, oFile=None, comment=''):
     opcodes = json.load(opcodes)
     program = iFile.read()
+    program = clean(program)
     program = add_includes(program, iFile.name)
-    program = expound_immediate(unify_words(clean(program)))
+    program = expound_immediate(unify_words(program))
     program = insert_bytecodes(replace_labels(program), opcodes)
     program = bytecode_to_ram_init(program, iFile.name, comment)
     if oFile is None:
