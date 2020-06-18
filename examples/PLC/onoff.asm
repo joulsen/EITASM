@@ -12,44 +12,48 @@ MSB 1 1
 POP 0
 
 // On Off main
-PUSH 0
+// The onoff controller permanently uses 0 registers
+// It uses the ram adresses 0x100 and 0x101.
+onoff_main:
+PUSH 0                    // First the used registers are pushed.
 PUSH 1
-OnOffStart:
-SNRDY 1
-GOTO ReadDetermine
-GOTO OnOffEnd
+onoff_start:
+SNRDY 1                   // Only do something if data is ready.
+GOTO onoff_read_determine
+GOTO onoff_end
 
-ReadDetermine:
-LOAD 0 0x100
-SEQ 0 $0
-GOTO ReadValue
-GOTO ReadDelim
+onoff_read_determine:
+LOAD 0 0x100              // Here we determine what the program must do
+SEQ 0 $0                  // If the state in ram 0x100 is 0 we must read delimiter
+GOTO onoff_read_value
+GOTO onoff_read_delim
 
-ReadDelim:
-READ 0 1
-SEQ 0 $35 // 35 = #
-GOTO OnOffEnd
+onoff_read_delim:
+READ 0 1                  // If the state is 0, we read the delimiter and alter state
+SEQ 0 $35                 // 35 = #. The delimiter is a #
+GOTO onoff_end
 LOAD 0 $1
 STORE 0 0x100
-GOTO OnOffStart
+GOTO onoff_start
 
-ReadValue:
-SEQ 0 $2
-GOTO ReadValue1
-READ 0 1
-LOAD 1 0x101
-CONC 0 1
-OOCW 0 0x0400
-CLRMEM 0x100
-GOTO OnOffEnd
+onoff_read_value:
+SEQ 0 $2                  // Here we check state again
+GOTO onoff_read_value1    // GOTO if state is 1
+READ 1 1
+LOAD 0 0x101              // We load the first part of the byte read in state 1
+CONC 0 1                  // We concatenate the two bytes to get the full value
+OOCW 0 0x0400             // The value is written to the onoff controller
+CLRMEM 0x100              // The state is reset
+GOTO onoff_end
 
-ReadValue1:
-READ 0 1
-STORE 0 0x101
+onoff_read_value1:
+READ 0 1                  // Here we read the first byte of 2 bytes of data from sensor input
+STORE 0 0x101             // It is stored into ram 0x101
 LOAD 0 $2
 STORE 0 0x100
-GOTO OnOffStart
+GOTO onoff_start
 
-OnOffEnd:
+onoff_end:
 POP 1
 POP 0
+
